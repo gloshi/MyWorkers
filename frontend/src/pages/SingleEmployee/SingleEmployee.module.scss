@@ -1,0 +1,79 @@
+.container {
+  height: 89vh;
+}
+.containerPsevdo {
+  display: flex;
+  padding-top: 50px;
+}
+.image {
+  padding-left: 400px;
+  img {
+    width: 400px;
+    height: 400px;
+  }
+}
+.info {
+  padding-left: 200px;
+  .infoBg {
+    margin-top: 60px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: white;
+  }
+  .box {
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+
+    &__firstName {
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid lightgrey;
+    }
+    &__lastName {
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid lightgrey;
+    }
+    &__age {
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid lightgrey;
+    }
+    &__location {
+      padding: 10px;
+      margin: 10px;
+      font-size: 18px;
+      border: 1px solid lightgrey;
+    }
+  }
+}
+.btnsEdit {
+  position: absolute;
+  
+  top: 590px;
+  display: flex;
+  left: 1160px;
+  gap: 20px;
+  z-index: 9;
+  width: 400px;
+  justify-content: space-between;
+
+  &__edit {
+    padding: 13px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background-color: lightsalmon;
+    border: none;
+  }
+  &__delete{
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: lightcoral;
+  }
+}

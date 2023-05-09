@@ -1,0 +1,103 @@
+.container {
+}
+.params {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  &__add {
+    button {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      background-color: rgb(70, 97, 248);
+      border: none;
+      border-radius: 10px;
+      align-items: center;
+      gap: 10px;
+      color: rgb(255, 255, 255);
+    }
+  }
+  &__search {
+    width: 700px;
+  }
+  &__groupBy {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    span {
+        font-size: 20px;
+    }
+    select {
+      background-color: rgb(70, 97, 248);
+      color: white;
+      padding: 10px;
+      width: 210px;
+      border: none;
+      font-size: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      -webkit-appearance: button;
+      appearance: button;
+      outline: none;
+    }
+    option {
+      padding: 10px;
+    }
+  }
+}
+.info {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 30px;
+    &__box{
+        width: 76%;
+        display: flex;
+        font-size: 22px;
+        justify-content: space-between;
+        .name {
+          
+          width: 300px;
+        }
+        .age {
+          width: 200px;
+          padding-right: 100px;
+        }
+    }
+}
+
+.employees {
+    display: flex;
+    justify-content: center;
+
+    &__box {
+        background-color: white;
+        width: 76%;
+        display: flex;
+        padding: 15px;
+        flex-direction: column;
+    }
+    .boxItem {
+        padding: 16px;
+        border: 0.5px solid lightgray;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        &__name {
+          padding-left: 100px;
+          width: 500px;
+        }
+        &__location {
+          width: 300px;
+            padding-right: 30px;
+        }
+        &__age {
+          width: 200px;
+            padding-right: 100px;
+        }
+    }
+}

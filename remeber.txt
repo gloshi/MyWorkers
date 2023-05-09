@@ -1,0 +1,6 @@
+{
+    "id": "de3f0d24-4e8a-48ad-960e-29db4fbbe6af",
+    "email": "gloshi1337@gmail.com",
+    "name": "gloshi",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlM2YwZDI0LTRlOGEtNDhhZC05NjBlLTI5ZGI0ZmJiZTZhZiIsImlhdCI6MTY4MzQ2NTAxNywiZXhwIjoxNjg2MDU3MDE3fQ.Evy_LeuhD8D1cdEV9xOT0_jWvUxNAS1kcWb2D5SsmLU"
+}

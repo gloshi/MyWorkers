@@ -1,0 +1,57 @@
+
+.modal {
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__content {
+        width: 800px;
+        height: 500px;
+        background-color: aliceblue;
+
+    }
+    .title {
+        padding-top: 40px;
+        font-size: 22px;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 40px;
+    }
+    .box {
+        padding-left: 45px;
+        padding-right: 45px;
+        &__btn {
+            display: flex;
+           
+            gap: 100px;
+            padding-top: 40px;
+           
+        }
+        .add {
+            width: 300px;
+            height: 40px;
+            font-size: 20px;
+            border: none;
+            color: white;
+            background-color: lightgreen;
+            cursor: pointer;
+        }
+        .close {
+            margin-left: 500px;
+            
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+            border: none;
+            background-color: lightcoral;
+            color: white;
+            cursor: pointer;
+            top: 200;
+            right: 400;
+        }
+    }
+}

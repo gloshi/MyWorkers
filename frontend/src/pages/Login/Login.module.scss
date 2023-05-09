@@ -1,0 +1,62 @@
+.container {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+
+
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 200px;
+    img {
+        width: 220px;
+    }
+}
+.leftBar {
+    width: 30%;
+    margin-right: 20px;
+    &__form {
+       padding-top: 80px;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    &__btns {
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            color: #1976d2;
+            font-size: 17px;
+            text-align: center;
+        }
+        button {
+            width: 160px;
+            height: 30px;
+            background-color: #75b445;
+            border: none;
+            color: black;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 17px;
+            &:hover {
+                background-color:  #8fda55;
+            }
+        }
+    }
+    &__links {
+        padding-top: 100px;
+        display: flex;
+        justify-content: center;
+        gap: 70px;
+        font-size: 20px;
+    }
+}
+.rigthBar {
+    background: url(../../../public/img/wrapper2.jpeg);
+    width: 100%;
+    height: 829px;
+    
+}
