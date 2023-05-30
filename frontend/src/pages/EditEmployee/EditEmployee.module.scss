@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 30px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.form {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.btnSave {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: lightgreen;
+    color: black;
+}
+.btnCancel {
+    position: absolute;
+    top: 256px;
+    right: 5px;
+    padding: 10px;
+    width: 120px;
+    border: none;
+    cursor: pointer;
+    background-color: lightcoral;
+    color: black;
+}

@@ -4,6 +4,7 @@ import { useEditEmployeeMutation, useGetSingleEmployeeQuery } from '../../app/co
 import { Form } from 'antd';
 import { CustomInput } from '../../components/Input';
 import { Employee } from '@prisma/client';
+import styles from "./EditEmployee.module.scss";
 
 const EditEmployee = () => {
 
@@ -31,16 +32,20 @@ const EditEmployee = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.title}>Страница изменения сотрудника</div>
+      <div className={styles.form}> 
       <Form name="add-employee" onFinish={handlEditUser} initialValues={data}>
         <CustomInput type="text" name="firstName" placeholder="Имя" />
         <CustomInput name="lastName" placeholder="Фамилия" />
         <CustomInput type="number" name="age" placeholder="Возраст" />
         <CustomInput name="address" placeholder="Адрес" />
         
-          <button type='submit'>{1}</button>
+          <button className={styles.btnSave} type='submit'>Сохранить изменения</button>
    
       </Form>
+      <button onClick={()=>navigate('/employee')} className={styles.btnCancel}>Отмена</button>
+      </div>
     </div>
   )
 }

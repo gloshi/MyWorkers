@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from "react";
 import styles from "./EmployeesCollection.module.scss";
-import Header from "../../components/Header/Header";
 import { RxAvatar } from "react-icons/rx";
 import { IoMdPersonAdd } from "react-icons/io";
-import { CustomInput } from "../../components/Input";
-import { Form } from "antd";
-import {
-  useGetAllQuery,
-  useGetSingleEmployeeQuery,
-} from "../../app/config/employee";
+
+import { useGetAllQuery } from "../../app/config/employee";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../paths";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUser } from "../../features/auth/authSlice";
 import NewEmployee from "../NewEmployee/NewEmployee";
-import { selectEmployees } from "../../features/employees/employeesSlice";
+
+interface IEmployee {
+  address: string;
+  age: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  userId: string;
+}
+
 const EmployeesCollection = () => {
   const { data, isLoading } = useGetAllQuery();
+  const [items, setItems] = useState<IEmployee[]>([]);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-
+  const [searchValue, setSearchValue] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [sort, setSort] = useState<string>("");
+  const [onClickSort, setOnClickSort] = useState<boolean>(false)
+
+  const sortItems = [
+    
+    { name: "Сбросить сортировку" },
+    { name: "Возрасту (DESC)" },
+    { name: "Возрасту (ASC)" },
+    { name: "Фамилии (DESC)" },
+    { name: "Фамилии (ASC)" },
+  ];
 
   useEffect(() => {
     if (!user) {
@@ -28,13 +44,62 @@ const EmployeesCollection = () => {
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    setItems(data);
+  }, [data]);
+
   const onClose = () => {
     setShowModal(false);
+    window.location.reload();
   };
-
   if (!data) {
     return <div>Загрузка...</div>;
   }
+  if (!items) {
+    return <div>Загрузка...</div>;
+  }
+
+  const handleClickSort = (obj: string) => {
+    setSort(obj);
+    sortFn(obj);
+  };
+
+  const sortFn = (name: string) => {
+    const copyData = data.concat();
+
+    if (name === "Сбросить сортировку") {
+      setItems(copyData);
+    }
+
+    if (name === "Возрасту (DESC)") {
+      const sortData = copyData.sort((a, b) => {
+        return a.age > b.age ? 1 : -1;
+      });
+      setItems(sortData);
+    }
+    if (name === "Возрасту (ASC)") {
+      const sortData = copyData.sort((a, b) => {
+        return a.age < b.age ? 1 : -1;
+      });
+      setItems(sortData);
+    }
+
+    if (name === "Фамилии (DESC)") {
+      const sortData = copyData.sort((a, b) => {
+        return a.lastName > b.lastName ? 1 : -1;
+      });
+      setItems(sortData);
+    }
+    if (name === "Фамилии (ASC)") {
+      const sortData = copyData.sort((a, b) => {
+        return a.lastName.charCodeAt(0) < b.lastName.charCodeAt(0) ? 1 : -1;
+      });
+      setItems(sortData);
+    }
+  };
 
   return (
     <>
@@ -54,21 +119,30 @@ const EmployeesCollection = () => {
             </button>
           </div>
           <div className={styles.params__search}>
-            <div style={{ paddingTop: 26 }}>
-              <Form onFinish={() => {}}>
-                <CustomInput type="text" name="search" placeholder="Поиск..." />
-              </Form>
+            <div className={styles.search}>
+              <input
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Поиск..."
+              />
             </div>
           </div>
           <div className={styles.params__groupBy}>
             <span>Группировать по:</span>
-            <form action="">
-              <select name="" id="">
-                <option>Не группировать</option>
-                <option>Адресу</option>
-                <option>Имени</option>
-              </select>
-            </form>
+            <ul className={styles.sortItems}>
+              <li onClick={() => setOnClickSort(!onClickSort)}>
+             Выберите тип сортировки
+              </li>
+              {
+                onClickSort && (
+                  sortItems.map((el) => (
+                <li key={el.name} onClick={() => handleClickSort(el.name)}>
+                  {el.name}
+                </li>
+              ))
+                )
+              }
+              
+            </ul>
           </div>
         </div>
         <div className={styles.info}>
@@ -82,22 +156,39 @@ const EmployeesCollection = () => {
         <div className={styles.employees}>
           <div className={styles.employees__box}>
             {data?.length > 0
-              ? data.map((el) => (
-                  <Link key={el.id} to={`${ROUTES.employee}/${el.id}`}>
-                    <div className={styles.boxItem}>
-                      <div className={styles.boxItem__avatar}>
-                        <RxAvatar size={30} />
+              ? items
+                  .filter((el) => {
+                    if (
+                      el.firstName
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase()) ||
+                      el.lastName
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase()) ||
+                      el.address
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase())
+                    ) {
+                      return true;
+                    }
+                    return false;
+                  })
+                  .map((el) => (
+                    <Link key={el.id} to={`${ROUTES.employee}/${el.id}`}>
+                      <div className={styles.boxItem}>
+                        <div className={styles.boxItem__avatar}>
+                          <RxAvatar size={30} />
+                        </div>
+                        <div className={styles.boxItem__name}>
+                          <span>{el.firstName}</span> <span>{el.lastName}</span>
+                        </div>
+                        <div className={styles.boxItem__age}>{el.age}</div>
+                        <div className={styles.boxItem__location}>
+                          {el.address}
+                        </div>
                       </div>
-                      <div className={styles.boxItem__name}>
-                        <span>{el.firstName}</span>  <span>{el.lastName}</span>
-                      </div>
-                      <div className={styles.boxItem__age}>{el.age}</div>
-                      <div className={styles.boxItem__location}>
-                        {el.address}
-                      </div>
-                    </div>
-                  </Link>
-                ))
+                    </Link>
+                  ))
               : ""}
           </div>
         </div>

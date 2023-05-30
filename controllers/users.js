@@ -41,7 +41,7 @@ const login = async (req, res) => {
 };
 // /api/user/register
 const register = async (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { name } = req.body;
   try {
     const { email, password } = req.body;
 
